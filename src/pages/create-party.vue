@@ -150,7 +150,6 @@
       createParty() {
         if (this.title.length === 0 || this.location.length === 0 || this.date.length === 0 || this.contacts.length === 0 || this.duration <= 0) {
           alert('Additional data is required, please recheck the input fields');
-          cordova.plugins.email.open();
         } else {
           let party = {
             title: this.title,
@@ -185,7 +184,9 @@
           isHtml: true
         };
 
-        navigator.email.open(mail);
+        // disabling eslint here because it can't see where 'cordova' is coming from even though the code works.
+        // eslint-disable-next-line no-undef
+        cordova.plugins.email.open(mail);
       },
       getInvitationMails() {
         let mails = [];
