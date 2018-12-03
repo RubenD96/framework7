@@ -40,17 +40,12 @@
         </f7-card-content>
       </f7-card>
 
-      <f7-button @click="createParty" fill round
-                 :disabled="title.length === 0 || date.length === 0 || contacts.length === 0 || duration <= 0">
-        Send Invitations
-      </f7-button>
-      <f7-button @click="createParty" fill round
-                 :disabled="true">
-        Send Invitations
-      </f7-button>
-
-      <f7-button @click="createParty" fill round
-                 :disabled="1 === 1">
+      <!--
+      https://github.com/framework7io/framework7-vue/issues/383
+      This git issue is the reason why the button was not disabled here with:
+      :disabled="title.length === 0 || date.length === 0 || contacts.length === 0 || duration <= 0"
+      -->
+      <f7-button @click="createParty" fill round>
         Send Invitations
       </f7-button>
 
@@ -153,30 +148,30 @@
         });
       },
       createParty() {
-        console.log(this.title.length);
-        console.log(this.date.length);
-        console.log(this.contacts.length);
-        console.log(this.duration);
-        let party = {
-          title: this.title,
-          description: this.description,
-          date: this.date,
-          contacts: []
-        };
-        for (let contact of this.contacts) {
-          party.contacts.push(contact);
-        }
-
-        let storage = localStorage.parties;
-        if (storage === undefined) {
-          localStorage.parties = JSON.stringify([party]);
+        if (this.title.length === 0 || this.date.length === 0 || this.contacts.length === 0 || this.duration <= 0) {
+          alert('Additional data is required, please recheck the input fields');
         } else {
-          let parties = JSON.parse(storage);
-          parties.push(party);
-          localStorage.parties = JSON.stringify(parties);
-        }
+          let party = {
+            title: this.title,
+            description: this.description,
+            date: this.date,
+            contacts: []
+          };
+          for (let contact of this.contacts) {
+            party.contacts.push(contact);
+          }
 
-        this.$f7router.navigate('/');
+          let storage = localStorage.parties;
+          if (storage === undefined) {
+            localStorage.parties = JSON.stringify([party]);
+          } else {
+            let parties = JSON.parse(storage);
+            parties.push(party);
+            localStorage.parties = JSON.stringify(parties);
+          }
+
+          this.$f7router.navigate('/');
+        }
       }
     }
   };
