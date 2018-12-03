@@ -23,6 +23,7 @@
     "cordova-android": "^7.0.0",
     "cordova-ios": "^4.1.1",
     "cordova-plugin-contacts": "^3.0.1",
+    "cordova-plugin-email-composer": "^0.8.15",
     "framework7": "^2.0.7",
     "framework7-icons": "^0.8.9",
     "framework7-vue": "^2.0.7",
@@ -114,7 +115,8 @@
       "ios"
     ],
     "plugins": {
-      "cordova-plugin-contacts": {}
+      "cordova-plugin-contacts": {},
+      "cordova-plugin-email-composer": {}
     }
   }
 }

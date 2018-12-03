@@ -24,7 +24,7 @@
         </f7-list-item>
         <f7-list-item>
           <f7-label>Duration (in hours)</f7-label>
-          <f7-input type="number" :value="duration" @input="duration = $event.target.value" placeholder="0"></f7-input>
+          <f7-input type="number" :value="duration" @input="duration = $event.target.value"></f7-input>
         </f7-list-item>
       </f7-list>
 
@@ -148,7 +148,7 @@
         });
       },
       createParty() {
-        if (this.title.length === 0 || this.date.length === 0 || this.contacts.length === 0 || this.duration <= 0) {
+        if (this.title.length === 0 || this.location.length === 0 || this.date.length === 0 || this.contacts.length === 0 || this.duration <= 0) {
           alert('Additional data is required, please recheck the input fields');
         } else {
           let party = {
@@ -172,6 +172,26 @@
 
           this.$f7router.navigate('/');
         }
+      },
+      sendMail() {
+        let start = new Date(this.date);
+        let end = new Date(start.getTime() + (this.duration * 60 * 60 * 1000));
+
+        let mail = {
+          to: this.getInvitationMails(),
+          subject: 'Party invitation: ' + this.title,
+          body: this.description + '<br><br>Location: ' + this.location + '<br>Time: ' + start + ' - ' + end,
+          isHtml: true
+        };
+
+        navigator.email.open(mail);
+      },
+      getInvitationMails() {
+        let mails = [];
+        for (let contact of this.contacts) {
+          mails.push(contact.mail);
+        }
+        return mails;
       }
     }
   };
