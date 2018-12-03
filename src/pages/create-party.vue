@@ -150,6 +150,7 @@
       createParty() {
         if (this.title.length === 0 || this.location.length === 0 || this.date.length === 0 || this.contacts.length === 0 || this.duration <= 0) {
           alert('Additional data is required, please recheck the input fields');
+          cordova.plugins.email.open();
         } else {
           let party = {
             title: this.title,
