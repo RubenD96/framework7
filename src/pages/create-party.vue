@@ -111,9 +111,7 @@
         contacts: [],
         title: '',
         description: '',
-        date: '',
-        name: '',
-        mail: ''
+        date: ''
       };
     },
     methods: {
@@ -128,9 +126,19 @@
         this.mail = '';
         */
 
-        navigator.contacts.pickContact(function (contact) {
-          console.log('The following contact has been selected:' + JSON.stringify(contact));
-        }, function (err) {
+        navigator.contacts.pickContact(contact => {
+          if (contact.emails === null) {
+            console.log('The following contact has been selected:' + JSON.stringify(contact));
+            alert('This contact does not have a mail!');
+          } else {
+            console.log('email: ' + contact.emails[0].value);
+            this.contacts.push({
+              id: contact.id,
+              name: contact.displayName,
+              mail: contact.emails[0].value
+            });
+          }
+        }, err => {
           console.log('Error: ' + err);
         });
       },
