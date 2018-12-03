@@ -9,13 +9,22 @@
                     placeholder="Party Title"></f7-input>
         </f7-list-item>
         <f7-list-item>
+          <f7-label>Location</f7-label>
+          <f7-input type="text" :value="location" @input="location = $event.target.value"
+                    placeholder="Party Location"></f7-input>
+        </f7-list-item>
+        <f7-list-item>
           <f7-label>Description</f7-label>
           <f7-input type="text" :value="description" @input="description = $event.target.value"
                     placeholder="Party Description"></f7-input>
         </f7-list-item>
         <f7-list-item>
-          <f7-label>Date</f7-label>
-          <f7-input type="date" :value="date" @input="date = $event.target.value"></f7-input>
+          <f7-label>Start Date</f7-label>
+          <f7-input type="datetime-local" :value="date" @input="date = $event.target.value"></f7-input>
+        </f7-list-item>
+        <f7-list-item>
+          <f7-label>Duration (in hours)</f7-label>
+          <f7-input type="number" :value="duration" @input="duration = $event.target.value" placeholder="0"></f7-input>
         </f7-list-item>
       </f7-list>
 
@@ -32,7 +41,7 @@
       </f7-card>
 
       <f7-button @click="createParty" fill round
-                 :disabled="title.length === 0 || date.length === 0 || contacts.length === 0">
+                 :disabled="title.length === 0 || date.length === 0 || contacts.length === 0 || duration <= 0">
         Send Invitations
       </f7-button>
 
@@ -110,22 +119,14 @@
       return {
         contacts: [],
         title: '',
+        location: '',
         description: '',
-        date: ''
+        date: '',
+        duration: 0
       };
     },
     methods: {
       addContact() {
-        /*
-        this.contacts.push({
-          id: this.contacts.length + 1,
-          name: this.name,
-          mail: this.mail
-        });
-        this.name = '';
-        this.mail = '';
-        */
-
         navigator.contacts.pickContact(contact => {
           if (contact.emails === null) {
             console.log('The following contact has been selected:' + JSON.stringify(contact));
@@ -143,6 +144,10 @@
         });
       },
       createParty() {
+        console.log(this.title.length);
+        console.log(this.date.length);
+        console.log(this.contacts.length);
+        console.log(this.duration);
         let party = {
           title: this.title,
           description: this.description,
