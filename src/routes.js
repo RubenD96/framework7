@@ -1,6 +1,5 @@
 import HomePage from './pages/home.vue';
 import CreatePartyPage from './pages/create-party.vue';
-import NotFoundPage from './pages/not-found.vue';
 
 export default [
   {
@@ -13,6 +12,6 @@ export default [
   },
   {
     path: '(.*)',
-    component: NotFoundPage
+    component: HomePage
   }
 ];
