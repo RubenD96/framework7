@@ -44,6 +44,15 @@
                  :disabled="title.length === 0 || date.length === 0 || contacts.length === 0 || duration <= 0">
         Send Invitations
       </f7-button>
+      <f7-button @click="createParty" fill round
+                 :disabled="true">
+        Send Invitations
+      </f7-button>
+
+      <f7-button @click="createParty" fill round
+                 :disabled="1 === 1">
+        Send Invitations
+      </f7-button>
 
       <!-- Popup -->
       <!--<f7-popup id="popup">
