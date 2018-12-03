@@ -21,12 +21,13 @@
   },
   "dependencies": {
     "cordova-android": "^7.0.0",
+    "cordova-ios": "^4.1.1",
+    "cordova-plugin-contacts": "^3.0.1",
     "framework7": "^2.0.7",
     "framework7-icons": "^0.8.9",
     "framework7-vue": "^2.0.7",
     "material-design-icons": "^3.0.1",
-    "vue": "^2.5.2",
-    "cordova-ios": "^4.1.1"
+    "vue": "^2.5.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -111,6 +112,9 @@
     "platforms": [
       "android",
       "ios"
-    ]
+    ],
+    "plugins": {
+      "cordova-plugin-contacts": {}
+    }
   }
 }

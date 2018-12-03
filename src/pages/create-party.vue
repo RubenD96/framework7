@@ -19,7 +19,7 @@
         </f7-list-item>
       </f7-list>
 
-      <f7-button fill round popup-open="#popup">Add Contact</f7-button>
+      <f7-button fill round @click="addContact">Add Contact</f7-button>
 
       <f7-card v-for="contact in contacts"
                v-bind:key="contact.id">
@@ -37,7 +37,7 @@
       </f7-button>
 
       <!-- Popup -->
-      <f7-popup id="popup">
+      <!--<f7-popup id="popup">
         <f7-view>
           <f7-page>
             <f7-navbar title="Popup">
@@ -65,7 +65,7 @@
             </f7-block>
           </f7-page>
         </f7-view>
-      </f7-popup>
+      </f7-popup>-->
     </f7-block>
   </f7-page>
 </template>
@@ -118,6 +118,7 @@
     },
     methods: {
       addContact() {
+        /*
         this.contacts.push({
           id: this.contacts.length + 1,
           name: this.name,
@@ -125,6 +126,13 @@
         });
         this.name = '';
         this.mail = '';
+        */
+
+        navigator.contacts.pickContact(function (contact) {
+          console.log('The following contact has been selected:' + JSON.stringify(contact));
+        }, function (err) {
+          console.log('Error: ' + err);
+        });
       },
       createParty() {
         let party = {
