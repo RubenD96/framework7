@@ -170,6 +170,8 @@
             localStorage.parties = JSON.stringify(parties);
           }
 
+          this.sendMail();
+
           this.$f7router.navigate('/');
         }
       },
