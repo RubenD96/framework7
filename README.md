@@ -2,7 +2,7 @@
 ## Project Setup
 ### Install node.js (and npm)
 
-Download the lates version of node.js (node-v<actual version>-x64.msi).
+Download the latest version of node.js (node-v<actual version>-x64.msi).
 
 	https://nodejs.org/en/download/
 
