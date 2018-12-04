@@ -170,15 +170,16 @@
             localStorage.parties = JSON.stringify(parties);
           }
 
-          this.sendMail();
+          let start = new Date(this.date);
+          let end = new Date(start.getTime() + (this.duration * 60 * 60 * 1000));
+
+          window.plugins.calendar.createEvent(this.title, this.location, this.description, start, end);
+          this.sendMail(start, end);
 
           this.$f7router.navigate('/');
         }
       },
-      sendMail() {
-        let start = new Date(this.date);
-        let end = new Date(start.getTime() + (this.duration * 60 * 60 * 1000));
-
+      sendMail(start, end) {
         let mail = {
           to: this.getInvitationMails(),
           subject: 'Party invitation: ' + this.title,
